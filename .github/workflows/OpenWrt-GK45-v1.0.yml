@@ -8,7 +8,7 @@ on:
 
 env:
   REPO_URL: https://github.com/coolsnowwolf/lede.git
-  REPO_BRANCH: 20211107
+  REPO_BRANCH: master
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
@@ -149,7 +149,6 @@ jobs:
           EOF
           # 常用LuCI插件选择:
           cat >> .config <<EOF
-          CONFIG_PACKAGE_luci-app-adbyby-plus=y
           CONFIG_PACKAGE_luci-app-hd-idle=y
           CONFIG_PACKAGE_luci-app-minidlna=y
           CONFIG_PACKAGE_luci-app-openvpn=y
@@ -169,10 +168,14 @@ jobs:
           CONFIG_PACKAGE_luci-app-unblockmusic_INCLUDE_UnblockNeteaseMusic_Go=y
           CONFIG_PACKAGE_luci-app-vlmcsd=y
           CONFIG_PACKAGE_luci-app-wol=y
-          CONFIG_PACKAGE_luci-app-pushbot=y
           CONFIG_PACKAGE_luci-app-netdata=y
           CONFIG_PACKAGE_luci-app-cifs-mount=y
           CONFIG_PACKAGE_luci-app-jd-dailybonus=y
+          CONFIG_PACKAGE_luci-app-adbyby-plus=m
+          CONFIG_PACKAGE_luci-app-pushbot=m
+          CONFIG_PACKAGE_luci-app-aliyundrive-webdav=m
+          CONFIG_PACKAGE_luci-app-docker=m
+          CONFIG_PACKAGE_luci-app-upnp=m
           EOF
           # LuCI主题:
           # CONFIG_PACKAGE_luci-theme-rosy=y
@@ -207,7 +210,6 @@ jobs:
           # CONFIG_PACKAGE_luci-app-uugamebooster is not set
           # CONFIG_PACKAGE_luci-app-xlnetacc is not set
           # CONFIG_PACKAGE_luci-app-vsftpd is not set
-          # CONFIG_PACKAGE_luci-app-upnp is not set
           # CONFIG_PACKAGE_luci-theme-netgear is not set
           # CONFIG_PACKAGE_kmod-r8169 is not set
           # CONFIG_PACKAGE_r8169-firmware is not set
