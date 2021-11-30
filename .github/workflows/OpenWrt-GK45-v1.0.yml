@@ -171,7 +171,7 @@ jobs:
           CONFIG_PACKAGE_luci-app-netdata=y
           CONFIG_PACKAGE_luci-app-cifs-mount=y
           CONFIG_PACKAGE_luci-app-upnp=y
-          CONFIG_PACKAGE_luci-app-jd-dailybonus=m
+          CONFIG_PACKAGE_luci-app-jd-dailybonus=y
           CONFIG_PACKAGE_luci-app-adbyby-plus=m
           CONFIG_PACKAGE_luci-app-pushbot=m
           CONFIG_PACKAGE_luci-app-aliyundrive-webdav=m
@@ -213,6 +213,7 @@ jobs:
           # CONFIG_PACKAGE_kmod-r8169 is not set
           # CONFIG_PACKAGE_r8169-firmware is not set
           # CONFIG_PACKAGE_luci-app-unblockmusic_INCLUDE_UnblockNeteaseMusic_NodeJS is not set
+          # CONFIG_PACKAGE_luci-app-docker is not set
           EOF
           # 
           # ========================固件定制部分结束========================
