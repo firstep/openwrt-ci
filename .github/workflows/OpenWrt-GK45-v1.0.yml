@@ -1,4 +1,4 @@
-# This is a basic workflow to help you get started with Actions
+# For KODLIX GK45
 
 name: OpenWRT-GK45-v1.0
 
@@ -170,12 +170,12 @@ jobs:
           CONFIG_PACKAGE_luci-app-wol=y
           CONFIG_PACKAGE_luci-app-netdata=y
           CONFIG_PACKAGE_luci-app-cifs-mount=y
-          CONFIG_PACKAGE_luci-app-jd-dailybonus=y
+          CONFIG_PACKAGE_luci-app-upnp=y
+          CONFIG_PACKAGE_luci-app-jd-dailybonus=m
           CONFIG_PACKAGE_luci-app-adbyby-plus=m
           CONFIG_PACKAGE_luci-app-pushbot=m
           CONFIG_PACKAGE_luci-app-aliyundrive-webdav=m
           CONFIG_PACKAGE_luci-app-docker=m
-          CONFIG_PACKAGE_luci-app-upnp=m
           EOF
           # LuCI主题:
           # CONFIG_PACKAGE_luci-theme-rosy=y
@@ -201,7 +201,6 @@ jobs:
           # CONFIG_VMDK_IMAGES is not set
           # CONFIG_PACKAGE_luci-app-aria2 is not set
           # CONFIG_PACKAGE_luci-app-baidupcs-web is not set
-          # CONFIG_PACKAGE_luci-app-docker is not set
           # CONFIG_PACKAGE_luci-app-frpc is not set
           # CONFIG_PACKAGE_luci-app-kodexplorer is not set
           # CONFIG_PACKAGE_luci-app-qbittorrent is not set
