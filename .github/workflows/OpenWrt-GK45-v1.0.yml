@@ -36,8 +36,8 @@ jobs:
           DEBIAN_FRONTEND: noninteractive
         run: |
           docker rmi `docker images -q`
-          sudo rm -rf /usr/share/dotnet /etc/mysql /etc/php /etc/apt/sources.list.d
-          sudo -E apt-get -y purge azure-cli ghc* zulu* hhvm llvm* firefox google* dotnet* powershell openjdk* mysql* php* android*
+          sudo rm -rf /usr/share/dotnet /etc/mysql /etc/php /etc/apt/sources.list.d /usr/local/lib/android
+          sudo -E apt-get -y purge azure-cli ghc* zulu* hhvm llvm* firefox google* dotnet* powershell openjdk* adoptopenjdk* mysql* php* mongodb* dotnet* moby* snapd* || true
           sudo -E apt-get update
           sudo -E apt-get -y install build-essential asciidoc binutils bzip2 gawk gettext git libncurses5-dev libz-dev patch python3 unzip zlib1g-dev lib32gcc1 libc6-dev-i386 subversion flex uglifyjs gcc-multilib g++-multilib p7zip p7zip-full msmtp libssl-dev texinfo libglib2.0-dev xmlto qemu-utils upx libelf-dev autoconf automake libtool autopoint device-tree-compiler antlr3 gperf swig
           sudo -E apt-get -y autoremove --purge
@@ -53,6 +53,8 @@ jobs:
           sed -i '/R[0-9]\+\.[0-9]\+\.[0-9]\+/s//& for Alvin4u/' package/lean/default-settings/files/zzz-default-settings
           # 禁Ping
           echo "net.ipv4.icmp_echo_ignore_all=1" >> package/base-files/files/etc/sysctl.conf
+          # 链接跟踪超限优化
+          echo "net.netfilter.nf_conntrack_max=165535" >> package/base-files/files/etc/sysctl.conf
           
       - name: Update feeds
         run: |
@@ -142,9 +144,8 @@ jobs:
           CONFIG_PACKAGE_kmod-usb2-pci=y
           CONFIG_PACKAGE_kmod-usb3=y
           EOF
-          # 默认MOD
+          # 默认网卡驱动
           cat >> .config <<EOF
-          CONFIG_DEFAULT_kmod-r8168=y
           CONFIG_PACKAGE_kmod-r8168=y
           EOF
           # 常用LuCI插件选择:
@@ -214,12 +215,16 @@ jobs:
           # CONFIG_PACKAGE_luci-app-unblockmusic_INCLUDE_UnblockNeteaseMusic_NodeJS is not set
           # CONFIG_PACKAGE_luci-app-docker is not set
           # CONFIG_PACKAGE_luci-app-dockerman is not set
+          # CONFIG_PACKAGE_luci-app-openvpn is not set
+          # CONFIG_PACKAGE_luci-app-ipsec-vpnd is not set
           EOF
           # 
           # ========================固件定制部分结束========================
           # 
           sed -i 's/^[ \t]*//g' ./.config
           make defconfig
+          echo "Make config complated..."
+          cat ./.config
       - name: Make download
         run: |
           make download -j8
