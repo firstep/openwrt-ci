@@ -132,17 +132,15 @@ jobs:
           CONFIG_PACKAGE_kmod-usb-ohci-pci=y
           CONFIG_PACKAGE_kmod-usb2=y
           CONFIG_PACKAGE_kmod-usb2-pci=y
-          CONFIG_PACKAGE_kmod-usb3=y
           EOF
-          # 默认网卡驱动
+          # 默认网络驱动
           cat >> .config <<EOF
-          CONFIG_PACKAGE_kmod-r8168=y
+          CONFIG_PACKAGE_kmod-mt76x2=y
           EOF
           # 常用LuCI插件选择:
           cat >> .config <<EOF
           CONFIG_PACKAGE_luci-app-hd-idle=y
           CONFIG_PACKAGE_luci-app-minidlna=y
-          CONFIG_PACKAGE_luci-app-openvpn=y
           CONFIG_PACKAGE_luci-app-openvpn-server=y
           CONFIG_PACKAGE_luci-app-ssr-plus=y
           CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_Kcptun=y
@@ -162,7 +160,6 @@ jobs:
           CONFIG_PACKAGE_luci-app-netdata=y
           CONFIG_PACKAGE_luci-app-cifs-mount=y
           CONFIG_PACKAGE_luci-app-upnp=y
-          CONFIG_PACKAGE_luci-app-jd-dailybonus=m
           CONFIG_PACKAGE_luci-app-adbyby-plus=m
           CONFIG_PACKAGE_luci-app-pushbot=m
           CONFIG_PACKAGE_luci-app-aliyundrive-webdav=y
@@ -177,7 +174,6 @@ jobs:
           CONFIG_PACKAGE_curl=y
           CONFIG_PACKAGE_htop=y
           CONFIG_PACKAGE_nano=y
-          CONFIG_PACKAGE_screen=y
           CONFIG_PACKAGE_tree=y
           CONFIG_PACKAGE_wget=y
           CONFIG_PACKAGE_iperf3=y
@@ -204,6 +200,7 @@ jobs:
           # CONFIG_PACKAGE_luci-app-dockerman is not set
           # CONFIG_PACKAGE_luci-app-openvpn is not set
           # CONFIG_PACKAGE_luci-app-ipsec-vpnd is not set
+          # CONFIG_PACKAGE_luci-app-jd-dailybonus is not set
           EOF
           # 
           # ========================固件定制部分结束========================
