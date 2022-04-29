@@ -73,7 +73,7 @@ jobs:
           sed -i '/disable-https/d' package/feeds/packages/netdata/Makefile
           sed -i '/DEPENDS.*$/s//& +libopenssl/' package/feeds/packages/netdata/Makefile
           sed -i '/allow dashboard/a\\tssl certificate = /etc/nginx/conf.d/_lan.crt\n\tssl key = /etc/nginx/conf.d/_lan.key' package/feeds/packages/netdata/files/netdata.conf
-          sed -i 's/\"http:\/\/\"/window.location.protocol + \"\/\/\"/' package/lean/luci-app-netdata/luasrc/view/netdata/netdata.htm
+          sed -i 's/\"http:\/\/\"/window.location.protocol + \"\/\/\"/' package/feeds/luci/luci-app-netdata/luasrc/view/netdata/netdata.htm
       #- name: Generate configuration file
       #  run: make defconfig
       - name: Customize configure file
