@@ -8,7 +8,7 @@ on:
 
 env:
   REPO_URL: https://github.com/coolsnowwolf/lede.git
-  REPO_BRANCH: master
+  REPO_BRANCH: 20220505
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
