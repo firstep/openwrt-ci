@@ -8,7 +8,7 @@ on:
 
 env:
   REPO_URL: https://github.com/coolsnowwolf/lede.git
-  REPO_BRANCH: master
+  REPO_BRANCH: 20221001
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
@@ -30,7 +30,6 @@ jobs:
       - name: Checkout
         run: |
           git clone $REPO_URL --branch $REPO_BRANCH $GITHUB_WORKSPACE
-
       - name: Space cleanup
         env:
           DEBIAN_FRONTEND: noninteractive
@@ -73,7 +72,7 @@ jobs:
           sed -i '/disable-https/d' package/feeds/packages/netdata/Makefile
           sed -i '/DEPENDS.*$/s//& +libopenssl/' package/feeds/packages/netdata/Makefile
           sed -i '/allow dashboard/a\\tssl certificate = /etc/nginx/conf.d/_lan.crt\n\tssl key = /etc/nginx/conf.d/_lan.key' package/feeds/packages/netdata/files/netdata.conf
-          sed -i 's/\"http:\/\/\"/window.location.protocol + \"\/\/\"/' package/lean/luci-app-netdata/luasrc/view/netdata/netdata.htm
+          sed -i 's/\"http:\/\/\"/window.location.protocol + \"\/\/\"/' package/feeds/luci/luci-app-netdata/luasrc/view/netdata/netdata.htm
       #- name: Generate configuration file
       #  run: make defconfig
       - name: Customize configure file
@@ -117,6 +116,7 @@ jobs:
           # 固件压缩:
           cat >> .config <<EOF
           CONFIG_TARGET_IMAGES_GZIP=y
+          CONFIG_TARGET_ROOTFS_TARGZ=y
           EOF
           # 编译UEFI固件:
           cat >> .config <<EOF
@@ -164,7 +164,6 @@ jobs:
           CONFIG_PACKAGE_luci-app-wireguard=y
           CONFIG_PACKAGE_luci-app-wrtbwmon=y
           CONFIG_PACKAGE_luci-app-syncdial=y
-          CONFIG_PACKAGE_luci-app-flowoffload=y
           CONFIG_PACKAGE_luci-app-unblockmusic=y
           CONFIG_PACKAGE_luci-app-unblockmusic_INCLUDE_UnblockNeteaseMusic_Go=y
           CONFIG_PACKAGE_luci-app-vlmcsd=y
@@ -172,10 +171,12 @@ jobs:
           CONFIG_PACKAGE_luci-app-netdata=y
           CONFIG_PACKAGE_luci-app-cifs-mount=y
           CONFIG_PACKAGE_luci-app-upnp=y
-          CONFIG_PACKAGE_luci-app-jd-dailybonus=m
           CONFIG_PACKAGE_luci-app-adbyby-plus=m
           CONFIG_PACKAGE_luci-app-pushbot=m
           CONFIG_PACKAGE_luci-app-aliyundrive-webdav=y
+          CONFIG_PACKAGE_luci-app-turboacc=y
+          CONFIG_PACKAGE_luci-app-turboacc_INCLUDE_SHORTCUT_FE=y
+          CONFIG_PACKAGE_luci-app-turboacc_INCLUDE_BBR_CCA=y
           EOF
           # LuCI主题:
           # CONFIG_PACKAGE_luci-theme-rosy=y
@@ -217,6 +218,8 @@ jobs:
           # CONFIG_PACKAGE_luci-app-dockerman is not set
           # CONFIG_PACKAGE_luci-app-openvpn is not set
           # CONFIG_PACKAGE_luci-app-ipsec-vpnd is not set
+          # CONFIG_PACKAGE_luci-app-jd-dailybonus is not set
+          # CONFIG_PACKAGE_luci-app-flowoffload is not set
           EOF
           # 
           # ========================固件定制部分结束========================
