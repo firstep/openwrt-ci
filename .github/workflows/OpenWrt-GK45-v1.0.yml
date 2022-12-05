@@ -10,16 +10,22 @@ env:
   REPO_URL: https://github.com/coolsnowwolf/lede.git
   REPO_BRANCH: 20221001
 
+permissions:
+  contents: read
+
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
 
   build_openwrt:
-
+  
+    permissions:
+      contents: write # for release creation
+      
     name: Build OpenWrt firmware
 
     runs-on: ubuntu-latest
 
-    if: github.event.repository.owner.id == github.event.sender.id
+    if: github.event.repository.owner.id == github.event.sender.id || ! github.event.sender.id
 
     steps:
 
