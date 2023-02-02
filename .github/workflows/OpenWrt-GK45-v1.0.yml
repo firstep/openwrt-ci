@@ -64,6 +64,8 @@ jobs:
         run: |
           cat >> feeds.conf.default <<EOF
           src-git helloworld https://github.com/fw876/helloworld
+          src-git passwall2 https://github.com/xiaorouji/openwrt-passwall2.git
+          src-git passwall_packages https://github.com/xiaorouji/openwrt-passwall.git;packages
           #src-git passwall https://github.com/xiaorouji/openwrt-passwall
           EOF
           ./scripts/feeds update -a
@@ -162,10 +164,8 @@ jobs:
           CONFIG_PACKAGE_luci-app-openvpn-server=y
           CONFIG_PACKAGE_luci-app-ssr-plus=y
           CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_Shadowsocks_NONE_Server=y
-          CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_Xray=y
-          CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_Hysteria=y
+          CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_V2Ray=y
           CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_NaiveProxy=y
-          CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_Trojan=y
           CONFIG_PACKAGE_luci-app-ttyd=y
           CONFIG_PACKAGE_luci-app-wireguard=y
           CONFIG_PACKAGE_luci-app-wrtbwmon=y
@@ -184,6 +184,13 @@ jobs:
           CONFIG_PACKAGE_luci-app-turboacc_INCLUDE_SHORTCUT_FE=y
           CONFIG_PACKAGE_luci-app-turboacc_INCLUDE_BBR_CCA=y
           CONFIG_PACKAGE_luci-app-watchcat=y
+          CONFIG_PACKAGE_luci-app-passwall2=y
+          CONFIG_PACKAGE_luci-app-passwall2_Transparent_Proxy=y
+          CONFIG_PACKAGE_luci-app-passwall2_INCLUDE_IPv6_Nat=y
+          CONFIG_PACKAGE_luci-app-passwall2_INCLUDE_NaiveProxy=y
+          CONFIG_PACKAGE_luci-app-passwall2_INCLUDE_Shadowsocks_Libev_Client=y
+          CONFIG_PACKAGE_luci-app-passwall2_INCLUDE_V2ray=y
+          CONFIG_PACKAGE_luci-app-passwall2_INCLUDE_V2ray_Plugin=y
           EOF
           # LuCI主题:
           # CONFIG_PACKAGE_luci-theme-rosy=y
@@ -228,7 +235,6 @@ jobs:
           # CONFIG_PACKAGE_luci-app-jd-dailybonus is not set
           # CONFIG_PACKAGE_luci-app-flowoffload is not set
           # CONFIG_PACKAGE_luci-app-turboacc_INCLUDE_SHORTCUT_FE_CM is not set
-          # CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_Shadowsocks_Simple_Obfs is not set
           # CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_Shadowsocks_Libev_Server is not set
           # CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_ShadowsocksR_Libev_Server is not set
           EOF
