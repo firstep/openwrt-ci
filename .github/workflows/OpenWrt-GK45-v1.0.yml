@@ -64,8 +64,6 @@ jobs:
         run: |
           cat >> feeds.conf.default <<EOF
           src-git helloworld https://github.com/fw876/helloworld
-          src-git passwall2 https://github.com/xiaorouji/openwrt-passwall2.git
-          src-git passwall_packages https://github.com/xiaorouji/openwrt-passwall.git;packages
           #src-git passwall https://github.com/xiaorouji/openwrt-passwall
           EOF
           ./scripts/feeds update -a
@@ -76,10 +74,10 @@ jobs:
           echo -e '\toption ssl_cert /etc/nginx/conf.d/_lan.crt' >> package/feeds/packages/ttyd/files/ttyd.config
           echo -e '\toption ssl_key /etc/nginx/conf.d/_lan.key' >> package/feeds/packages/ttyd/files/ttyd.config
           # ================ netdata 支持 ssl(默认用ningx的证书) ================ 
-          sed -i '/disable-https/d' package/feeds/packages/netdata/Makefile
-          sed -i '/DEPENDS.*$/s//& +libopenssl/' package/feeds/packages/netdata/Makefile
-          sed -i '/allow dashboard/a\\tssl certificate = /etc/nginx/conf.d/_lan.crt\n\tssl key = /etc/nginx/conf.d/_lan.key' package/feeds/packages/netdata/files/netdata.conf
-          sed -i 's/\"http:\/\/\"/window.location.protocol + \"\/\/\"/' package/feeds/luci/luci-app-netdata/luasrc/view/netdata/netdata.htm
+          #sed -i '/disable-https/d' package/feeds/packages/netdata/Makefile
+          #sed -i '/DEPENDS.*$/s//& +libopenssl/' package/feeds/packages/netdata/Makefile
+          #sed -i '/allow dashboard/a\\tssl certificate = /etc/nginx/conf.d/_lan.crt\n\tssl key = /etc/nginx/conf.d/_lan.key' package/feeds/packages/netdata/files/netdata.conf
+          #sed -i 's/\"http:\/\/\"/window.location.protocol + \"\/\/\"/' package/feeds/luci/luci-app-netdata/luasrc/view/netdata/netdata.htm
       #- name: Generate configuration file
       #  run: make defconfig
       - name: Customize configure file
@@ -158,23 +156,22 @@ jobs:
           CONFIG_PACKAGE_kmod-r8168=y
           EOF
           # 常用LuCI插件选择:
+          #CONFIG_PACKAGE_luci-app-netdata=y
           cat >> .config <<EOF
           CONFIG_PACKAGE_luci-app-hd-idle=y
           CONFIG_PACKAGE_luci-app-minidlna=y
           CONFIG_PACKAGE_luci-app-openvpn-server=y
           CONFIG_PACKAGE_luci-app-ssr-plus=y
-          CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_Shadowsocks_NONE_Server=y
-          CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_V2Ray=y
           CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_NaiveProxy=y
+          CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_Hysteria=y
           CONFIG_PACKAGE_luci-app-ttyd=y
           CONFIG_PACKAGE_luci-app-wireguard=y
           CONFIG_PACKAGE_luci-app-wrtbwmon=y
-          CONFIG_PACKAGE_luci-app-syncdial=y
+          CONFIG_PACKAGE_luci-app-syncdial=m
           CONFIG_PACKAGE_luci-app-unblockmusic=y
           CONFIG_PACKAGE_luci-app-unblockmusic_INCLUDE_UnblockNeteaseMusic_Go=y
           CONFIG_PACKAGE_luci-app-vlmcsd=y
           CONFIG_PACKAGE_luci-app-wol=y
-          CONFIG_PACKAGE_luci-app-netdata=y
           CONFIG_PACKAGE_luci-app-cifs-mount=y
           CONFIG_PACKAGE_luci-app-upnp=y
           CONFIG_PACKAGE_luci-app-adbyby-plus=m
@@ -183,15 +180,7 @@ jobs:
           CONFIG_PACKAGE_luci-app-turboacc=y
           CONFIG_PACKAGE_luci-app-turboacc_INCLUDE_SHORTCUT_FE=y
           CONFIG_PACKAGE_luci-app-turboacc_INCLUDE_BBR_CCA=y
-          CONFIG_PACKAGE_luci-app-watchcat=y
-          CONFIG_PACKAGE_luci-app-passwall2=y
-          CONFIG_PACKAGE_luci-app-passwall2_Transparent_Proxy=y
-          CONFIG_PACKAGE_luci-app-passwall2_INCLUDE_IPv6_Nat=y
-          CONFIG_PACKAGE_luci-app-passwall2_INCLUDE_NaiveProxy=y
-          CONFIG_PACKAGE_luci-app-passwall2_INCLUDE_Shadowsocks_Libev_Client=y
-          CONFIG_PACKAGE_luci-app-passwall2_INCLUDE_ShadowsocksR_Libev_Client=y
-          CONFIG_PACKAGE_luci-app-passwall2_INCLUDE_V2ray=y
-          CONFIG_PACKAGE_luci-app-passwall2_INCLUDE_V2ray_Plugin=y
+          CONFIG_PACKAGE_luci-app-watchcat=m
           EOF
           # LuCI主题:
           # CONFIG_PACKAGE_luci-theme-rosy=y
@@ -236,8 +225,6 @@ jobs:
           # CONFIG_PACKAGE_luci-app-jd-dailybonus is not set
           # CONFIG_PACKAGE_luci-app-flowoffload is not set
           # CONFIG_PACKAGE_luci-app-turboacc_INCLUDE_SHORTCUT_FE_CM is not set
-          # CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_Shadowsocks_Libev_Server is not set
-          # CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_ShadowsocksR_Libev_Server is not set
           EOF
           # 
           # ========================固件定制部分结束========================
