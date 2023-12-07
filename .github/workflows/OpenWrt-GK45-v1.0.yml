@@ -172,6 +172,7 @@ jobs:
           CONFIG_PACKAGE_luci-app-wol=y
           CONFIG_PACKAGE_luci-app-cifs-mount=y
           CONFIG_PACKAGE_luci-app-upnp=y
+          CONFIG_PACKAGE_luci-app-udpxy=y
           CONFIG_PACKAGE_luci-app-adbyby-plus=m
           CONFIG_PACKAGE_luci-app-pushbot=m
           CONFIG_PACKAGE_luci-app-turboacc=y
