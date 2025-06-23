@@ -74,8 +74,7 @@ jobs:
       - name: Update feeds
         run: |
           cat >> feeds.conf.default <<EOF
-          src-git helloword https://github.com/sbwml/openwrt_helloworld;v5
-          #src-git helloworld https://github.com/fw876/helloworld;main
+          src-git helloworld https://github.com/fw876/helloworld;master
           #src-git passwall https://github.com/xiaorouji/openwrt-passwall
           EOF
           ./scripts/feeds update -a
