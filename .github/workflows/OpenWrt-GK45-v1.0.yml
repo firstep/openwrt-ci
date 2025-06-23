@@ -145,6 +145,13 @@ jobs:
           CONFIG_PACKAGE_kmod-ip6tables=y
           CONFIG_PACKAGE_kmod-ip6tables-extra=y
           EOF
+          # Netfilter Extensions:
+          cat >> .config <<EOF
+          CONFIG_PACKAGE_kmod-nfnetlink-queue=y
+          CONFIG_PACKAGE_kmod-nft-core=y
+          CONFIG_PACKAGE_kmod-nft-queue=y
+          CONFIG_IPTABLES_NFTABLES=y
+          EOF
           # 多文件系统支持:
           cat >> .config <<EOF
           CONFIG_PACKAGE_kmod-fs-nfs=y
@@ -212,6 +219,7 @@ jobs:
           CONFIG_PACKAGE_nginx-mod-luci=y
           CONFIG_PACKAGE_nginx-ssl=y
           CONFIG_PACKAGE_nginx-ssl-util=y
+          CONFIG_PACKAGE_libnftnl=y
           EOF
           # 取消编译VMware镜像以及镜像填充 (不要删除被缩进的注释符号):
           cat >> .config <<EOF
@@ -238,6 +246,8 @@ jobs:
           # CONFIG_PACKAGE_luci-app-jd-dailybonus is not set
           # CONFIG_PACKAGE_luci-app-flowoffload is not set
           # CONFIG_PACKAGE_luci-app-turboacc_INCLUDE_SHORTCUT_FE_CM is not set
+          # CONFIG_PACKAGE_ip6tables-nft is not set
+          # CONFIG_PACKAGE_iptables-nft is not set
           EOF
           # 
           # ========================固件定制部分结束========================
