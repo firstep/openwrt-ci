@@ -227,8 +227,6 @@ jobs:
           CONFIG_PACKAGE_nginx-mod-luci=y
           CONFIG_PACKAGE_nginx-ssl=y
           CONFIG_PACKAGE_nginx-ssl-util=y
-          CONFIG_PACKAGE_firewall=m
-          CONFIG_PACKAGE_firewall4=y
           CONFIG_PACKAGE_libnftnl=y
           CONFIG_PACKAGE_libxtables-nft=y
           CONFIG_PACKAGE_iptables-nft=y
